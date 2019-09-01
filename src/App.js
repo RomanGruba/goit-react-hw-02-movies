@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styles from './styles.module.css';
+import SearchBar from './Components/SearchBar';
+import MovieGrid from './Components/MovieGrid';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const filterMovies = (movies, filter) => {
+  return movies.filter(movie =>
+    movie.title.toLowerCase().includes(filter.toLowerCase()),
   );
-}
+};
 
-export default App;
+export default class App extends Component {
+  state = {
+    movies: [...this.props.items],
+    filter: '',
+  };
+
+  changeFilter = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  render() {
+    const { movies, filter } = this.state;
+    const filteredList = filterMovies(movies, filter);
+    return (
+      <>
+        <SearchBar value={this.state.inputValue} onChange={this.changeFilter} />
+        <MovieGrid filteredList={filteredList} />
+      </>
+    );
+  }
+}
