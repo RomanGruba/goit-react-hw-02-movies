@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.module.css';
-import SearchBar from './Components/SearchBar';
-import MovieGrid from './Components/MovieGrid';
+import SearchBar from './SearchBar/SearchBar';
+import MovieGrid from './MovieGrid/MovieGrid';
 
 const filterMovies = (movies, filter) => {
   return movies.filter(movie =>
@@ -31,3 +30,14 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      posterUrl: PropTypes.string.isRequired,
+      overview: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+};

@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from '../styles.module.css';
+import PropTypes from 'prop-types';
+import styles from './SearchBar.module.css';
 
 const SearchBar = ({ value, onChange }) => (
   <input
@@ -9,5 +10,10 @@ const SearchBar = ({ value, onChange }) => (
     onChange={onChange}
   />
 );
+
+SearchBar.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
